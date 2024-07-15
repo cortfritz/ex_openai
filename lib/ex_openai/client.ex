@@ -2,6 +2,7 @@ defmodule ExOpenAI.Client do
   @moduledoc false
   use HTTPoison.Base
   alias ExOpenAI.Config
+  Require Logger
 
   def process_url(url), do: Config.api_url() <> url
 
@@ -83,6 +84,7 @@ defmodule ExOpenAI.Client do
   end
 
   def api_get(url, request_options \\ [], convert_response) do
+    Logger.debug("EOAI GET request to #{url}")
     request_options = Keyword.merge(request_options(), request_options)
     stream_options = stream_options(request_options, convert_response)
 
@@ -105,6 +107,7 @@ defmodule ExOpenAI.Client do
   end
 
   def api_post(url, params \\ [], request_options \\ [], convert_response) do
+    Logger.debug("EOAI POST request to #{url} with params #{inspect(params)}")
     body =
       params
       |> Enum.into(%{})
