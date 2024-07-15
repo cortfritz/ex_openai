@@ -2,7 +2,7 @@ defmodule ExOpenAI.Client do
   @moduledoc false
   use HTTPoison.Base
   alias ExOpenAI.Config
-  Require Logger
+  require Logger
 
   def process_url(url), do: Config.api_url() <> url
 
